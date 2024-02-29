@@ -3,8 +3,20 @@ import random
 
 # función que solicita al usuario que ingrese un número y lo devuelve como un entero (int)
 def obtener_suposicion_jugador():
-    """Obtiene la suposición del jugador."""
-    return int(input("¿Elige un número? "))
+    for _ in range(3):  # Permitir hasta 3 intentos
+        try:
+            user_input = int(input('Ingrese un número entre 1 y 100: '))
+            if user_input < 1 or user_input > 100:
+                print("Por favor, ingrese un número válido entre 1 y 100.")
+            else:
+                return user_input
+        except ValueError:
+            print("Por favor, ingrese un número válido.")
+    else:
+        print("Ha superado el número máximo de intentos.")
+        return None
+    # """Obtiene la suposición del jugador."""
+    # return int(input("¿Elige un número? "))
 
 # función que genera aleatoriamente un número entre 1 y 100 y lo devuelve.
 def obtener_suposicion_ordenador():
@@ -33,24 +45,31 @@ def jugar():
     suposiciones_jugador = []
     suposiciones_ordenador = []
 
-    while True:
+    #while True:
+    for _ in range(3): 
         intento_ordenador = obtener_suposicion_ordenador()
         suposiciones_ordenador.append(intento_ordenador)
         print("El ordenador elige:", intento_ordenador)
 
         if comparar_suposiciones(numero_aleatorio, intento_ordenador):
             break
-
-        intento_jugador = obtener_suposicion_jugador()
+        
+        player_number = obtener_suposicion_jugador()
+        if player_number is None:
+            break
+        intento_jugador = player_number
         suposiciones_jugador.append(intento_jugador)
 
         if comparar_suposiciones(numero_aleatorio, intento_jugador):
             break
 
     print("Todas las suposiciones de la jugadora:", suposiciones_jugador)
+def main():
 
-while True:
-    jugar()
-    jugar_de_nuevo = input("¿Quieres jugar de nuevo? (si/No)")
-    if jugar_de_nuevo.lower() != "si":
-        break
+    while True:
+        jugar()
+        jugar_de_nuevo = input("¿Quieres jugar de nuevo? (si/No)")
+        if jugar_de_nuevo.lower() != "si":
+            break
+if __name__ == "__main__":
+    main()

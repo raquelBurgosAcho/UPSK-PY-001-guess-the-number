@@ -31,10 +31,12 @@ def comparar_suposiciones(numero_aleatorio, suposicion):
         return True
     elif suposicion < numero_aleatorio:
         print("Muy bajo. Intenta de nuevo.")
+    
         return False
     else:
         print("Muy alto. Intenta de nuevo.")
         return False
+        
 
 def jugar():
     """Función principal para jugar el juego."""
@@ -63,7 +65,7 @@ def jugar():
         if comparar_suposiciones(numero_aleatorio, intento_jugador):
             break
 
-    print("Todas las suposiciones de la jugadora:", suposiciones_jugador)
+        print("Todas las suposiciones de la jugadora:", suposiciones_jugador)
 def main():
 
     while True:
